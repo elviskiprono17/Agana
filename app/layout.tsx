@@ -15,7 +15,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#ffffff",
+  themeColor: "#f4f4f6",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#fafafa] text-[#09090b] min-h-screen antialiased selection:bg-black selection:text-white">
+      <body className="bg-[#f4f4f6] text-[#09090b] min-h-screen antialiased selection:bg-black selection:text-white">
         <div className="kenya-ribbon fixed top-0 left-0 right-0 z-50" />
         {children}
       </body>

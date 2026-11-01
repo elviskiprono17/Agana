@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #fafafa;
+  --background: #f4f4f6;
   --foreground: #09090b;
   --surface: #ffffff;
   --border: #e4e4e7;
@@ -12,29 +12,29 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: #f4f4f6;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Custom Scrollbar for Light Theme */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f4f4f5;
+  background: #ebebee;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
+  background: #cbd5e1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa;
+  background: #94a3b8;
 }
 
 /* Kenyan Flag Subtle Ribbon */

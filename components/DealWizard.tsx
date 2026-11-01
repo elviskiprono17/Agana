@@ -26,6 +26,7 @@ import {
   UserCheck,
   Copy,
   Check,
+  Award,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -105,7 +106,7 @@ export const DealWizard: React.FC = () => {
   const handleSelectPreset = (preset: PresetConfig) => {
     setSelectedPreset(preset);
     setClauses(preset.defaultClauses);
-    
+
     if (preset.id === 'phone_electronics') {
       setTitle('Sale of Apple iPhone 15 Pro Max 256GB');
       setAmountKes(145000);
@@ -136,7 +137,7 @@ export const DealWizard: React.FC = () => {
       setAmountKes(180000);
       setMetrics({
         service_discipline: 'Fullstack Web / Mobile App Development',
-        project_title: 'Agana MVP Marketplace and Didit KYC Integration',
+        project_title: 'Agana Marketplace and Didit KYC Integration',
         key_deliverables: '1. Next.js responsive app\n2. Didit Biometric verification\n3. Supabase database schema\n4. Small Claims PDF compiler',
         delivery_deadline: '2026-11-20',
         deposit_split: '50% Upfront Deposit, 50% on Final Delivery',
@@ -351,7 +352,7 @@ export const DealWizard: React.FC = () => {
           </div>
         </div>
 
-        {/* Monochrome Progress bar */}
+        {/* Progress bar */}
         <div className="w-full bg-zinc-200 h-1.5 rounded-full overflow-hidden flex">
           {[1, 2, 3, 4, 5].map((step) => (
             <div
@@ -410,12 +411,13 @@ export const DealWizard: React.FC = () => {
             })}
           </div>
 
-          <div className="flex justify-end pt-4">
+          {/* Centered Continue button */}
+          <div className="flex justify-center pt-6">
             <button
               onClick={() => setCurrentStep(2)}
-              className="flex items-center space-x-2 px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-sm font-bold shadow-sm active:scale-95 transition-all"
+              className="flex items-center space-x-2 px-8 py-3.5 rounded-xl bg-black hover:bg-zinc-800 text-white text-sm font-bold shadow-sm active:scale-95 transition-all cursor-pointer"
             >
-              <span>Continue to Questionnaire</span>
+              <span>Continue</span>
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
@@ -521,7 +523,7 @@ export const DealWizard: React.FC = () => {
             </div>
           </div>
 
-          {/* DYNAMIC QUESTIONNAIRE FIELDS BASED ON PRESET */}
+          {/* DYNAMIC QUESTIONNAIRE FIELDS */}
           <div className="p-4 sm:p-5 bg-white border border-zinc-200 rounded-2xl space-y-4 shadow-sm">
             <div className="flex items-center justify-between border-b border-zinc-100 pb-2">
               <h3 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
@@ -595,7 +597,7 @@ export const DealWizard: React.FC = () => {
             </div>
           </div>
 
-          {/* EXTRA SAFETY QUESTIONS */}
+          {/* SAFETY QUESTIONS */}
           <div className="p-4 sm:p-5 bg-white border border-zinc-200 rounded-2xl space-y-4 shadow-sm">
             <h3 className="text-xs font-bold text-zinc-950 uppercase tracking-wider flex items-center space-x-1.5">
               <Scale className="h-3.5 w-3.5" />
@@ -630,7 +632,7 @@ export const DealWizard: React.FC = () => {
             </div>
           </div>
 
-          {/* CUSTOM CLAUSES ENGINE */}
+          {/* CUSTOM CLAUSES */}
           <div className="p-4 sm:p-5 bg-white border border-zinc-200 rounded-2xl shadow-sm">
             <CustomClausesEditor clauses={clauses} onChange={setClauses} />
           </div>
@@ -638,14 +640,14 @@ export const DealWizard: React.FC = () => {
           <div className="flex items-center justify-between pt-4">
             <button
               onClick={() => setCurrentStep(1)}
-              className="flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 text-xs font-semibold border border-zinc-300"
+              className="flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 text-xs font-semibold border border-zinc-300 cursor-pointer"
             >
               <ArrowLeft className="h-4 w-4" />
               <span>Back</span>
             </button>
             <button
               onClick={() => setCurrentStep(3)}
-              className="flex items-center space-x-2 px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-sm font-bold shadow-sm active:scale-95 transition-all"
+              className="flex items-center space-x-2 px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-sm font-bold shadow-sm active:scale-95 transition-all cursor-pointer"
             >
               <span>Proceed to Verify KYC</span>
               <ArrowRight className="h-4 w-4" />
@@ -696,7 +698,7 @@ export const DealWizard: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => startDiditVerification('creator')}
-                  className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-bold shadow-sm"
+                  className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-bold shadow-sm cursor-pointer"
                 >
                   <Camera className="h-3.5 w-3.5" />
                   <span>Verify ID & Selfie</span>
@@ -752,7 +754,7 @@ export const DealWizard: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => startDiditVerification('counterparty')}
-                  className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-bold border border-zinc-300"
+                  className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-bold border border-zinc-300 cursor-pointer"
                 >
                   <Camera className="h-3.5 w-3.5" />
                   <span>Verify Counterparty</span>
@@ -787,7 +789,7 @@ export const DealWizard: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => startDiditVerification('witness')}
-                  className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-bold border border-zinc-300"
+                  className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-bold border border-zinc-300 cursor-pointer"
                 >
                   <Camera className="h-3.5 w-3.5" />
                   <span>Verify Witness</span>
@@ -799,7 +801,7 @@ export const DealWizard: React.FC = () => {
           <div className="flex items-center justify-between pt-4">
             <button
               onClick={() => setCurrentStep(2)}
-              className="flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 text-xs font-semibold border border-zinc-300"
+              className="flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 text-xs font-semibold border border-zinc-300 cursor-pointer"
             >
               <ArrowLeft className="h-4 w-4" />
               <span>Back</span>
@@ -812,7 +814,7 @@ export const DealWizard: React.FC = () => {
                 }
                 setCurrentStep(4);
               }}
-              className="flex items-center space-x-2 px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-sm font-bold shadow-sm active:scale-95 transition-all"
+              className="flex items-center space-x-2 px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-sm font-bold shadow-sm active:scale-95 transition-all cursor-pointer"
             >
               <span>Proceed to 3-Party Signing</span>
               <ArrowRight className="h-4 w-4" />
@@ -857,7 +859,7 @@ export const DealWizard: React.FC = () => {
                     neutrality_confirmed: e.target.checked,
                   }))
                 }
-                className="mt-0.5 h-4 w-4 rounded border-zinc-400 text-black focus:ring-black bg-white"
+                className="mt-0.5 h-4 w-4 rounded border-zinc-400 text-black focus:ring-black bg-white cursor-pointer"
               />
               <span className="text-xs text-zinc-900 font-bold">
                 I hereby certify that {witness.full_name} is an independent neutral witness, has no personal financial interest in this deal, and witnesses freely under Cap 23 Laws of Kenya.
@@ -910,7 +912,7 @@ export const DealWizard: React.FC = () => {
           <div className="flex items-center justify-between pt-4">
             <button
               onClick={() => setCurrentStep(3)}
-              className="flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 text-xs font-semibold border border-zinc-300"
+              className="flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 text-xs font-semibold border border-zinc-300 cursor-pointer"
             >
               <ArrowLeft className="h-4 w-4" />
               <span>Back</span>
@@ -918,7 +920,7 @@ export const DealWizard: React.FC = () => {
             <button
               disabled={isSealing}
               onClick={handleSealContract}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-xl text-sm font-bold shadow-md transition-all active:scale-95 ${
+              className={`flex items-center space-x-2 px-6 py-3 rounded-xl text-sm font-bold shadow-md transition-all active:scale-95 cursor-pointer ${
                 witness.neutrality_confirmed && creator.signature_data && counterparty.signature_data && witness.signature_data
                   ? 'bg-black hover:bg-zinc-800 text-white'
                   : 'bg-zinc-300 text-zinc-600 cursor-not-allowed'
@@ -944,7 +946,7 @@ export const DealWizard: React.FC = () => {
       {currentStep === 5 && sealedAgreement && (
         <div className="space-y-6 animate-in fade-in duration-300">
           {/* Success Banner */}
-          <div className="p-6 bg-white border border-zinc-200 rounded-3xl text-center space-y-4 shadow-sm">
+          <div className="p-6 bg-white border border-zinc-200 rounded-3xl text-center space-y-5 shadow-sm">
             <div className="h-16 w-16 mx-auto rounded-full bg-zinc-100 border-2 border-zinc-900 flex items-center justify-center">
               <CheckCircle2 className="h-9 w-9 text-zinc-900" />
             </div>
@@ -962,9 +964,9 @@ export const DealWizard: React.FC = () => {
             </div>
 
             {/* SHA-256 Seal Box */}
-            <div className="max-w-md mx-auto p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-left space-y-1">
+            <div className="max-w-md mx-auto p-3.5 bg-zinc-50 border border-zinc-200 rounded-xl text-left space-y-1">
               <div className="flex items-center justify-between text-[10px] text-zinc-600">
-                <span className="font-bold text-zinc-950">SHA-256 TAMPER-PROOF SEAL:</span>
+                <span className="font-bold text-zinc-950">SHA-256 INTEGRITY SEAL:</span>
                 <span>{new Date(sealedAgreement.sealed_at || Date.now()).toLocaleTimeString()}</span>
               </div>
               <p className="font-mono text-[10px] text-zinc-900 font-bold break-all bg-white p-2 rounded border border-zinc-200">
@@ -976,7 +978,7 @@ export const DealWizard: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <button
                 onClick={handleDownloadPDF}
-                className="w-full sm:w-auto flex items-center justify-center space-x-2 px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-bold shadow-sm transition-all active:scale-95"
+                className="w-full sm:w-auto flex items-center justify-center space-x-2 px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-bold shadow-sm transition-all active:scale-95 cursor-pointer"
               >
                 <Download className="h-4 w-4" />
                 <span>Download Sealed PDF Contract</span>
@@ -984,7 +986,7 @@ export const DealWizard: React.FC = () => {
 
               <button
                 onClick={handleCopyShareLink}
-                className="w-full sm:w-auto flex items-center justify-center space-x-2 px-4 py-3 rounded-xl bg-white hover:bg-zinc-100 text-zinc-900 text-xs font-semibold border border-zinc-300 transition-all"
+                className="w-full sm:w-auto flex items-center justify-center space-x-2 px-4 py-3 rounded-xl bg-white hover:bg-zinc-100 text-zinc-900 text-xs font-semibold border border-zinc-300 transition-all cursor-pointer"
               >
                 {copiedLink ? <Check className="h-4 w-4 text-black" /> : <Copy className="h-4 w-4" />}
                 <span>{copiedLink ? 'Link Copied!' : 'Copy Shareable Link'}</span>
@@ -996,11 +998,42 @@ export const DealWizard: React.FC = () => {
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full sm:w-auto flex items-center justify-center space-x-2 px-4 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-semibold border border-zinc-300 transition-all"
+                className="w-full sm:w-auto flex items-center justify-center space-x-2 px-4 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-semibold border border-zinc-300 transition-all cursor-pointer"
               >
                 <Share2 className="h-4 w-4" />
                 <span>Share via WhatsApp</span>
               </a>
+            </div>
+
+            {/* Prominent Circular Agana Seal Stamp at Bottom of Document */}
+            <div className="pt-4 border-t border-zinc-100 flex flex-col items-center">
+              <div className="relative w-40 h-40 rounded-full border-4 border-zinc-900 flex items-center justify-center bg-white shadow-sm p-2 text-center select-none">
+                <div className="absolute inset-1 rounded-full border border-dashed border-zinc-500" />
+                <div className="absolute inset-2.5 rounded-full border-2 border-zinc-900" />
+                
+                <div className="space-y-0.5 z-10 px-1">
+                  <div className="flex items-center justify-center text-[9px] font-black tracking-widest uppercase text-zinc-950">
+                    ★ AGANA ★
+                  </div>
+                  <div className="text-[7.5px] font-bold text-zinc-700 tracking-wider uppercase">
+                    DIGITAL NOTARIAL SEAL
+                  </div>
+                  <div className="py-0.5">
+                    <span className="text-[11px] font-black text-black px-1.5 py-0.5 bg-zinc-100 rounded border border-zinc-300">
+                      AUTHENTIC
+                    </span>
+                  </div>
+                  <div className="text-[6.5px] font-mono font-bold text-zinc-800">
+                    {sealedAgreement.sha256_seal?.slice(0, 12).toUpperCase()}
+                  </div>
+                  <div className="text-[6.5px] font-bold text-zinc-600">
+                    REPUBLIC OF KENYA • CAP 23
+                  </div>
+                </div>
+              </div>
+              <span className="text-[10px] text-zinc-500 font-semibold mt-2">
+                Official Agana Notarial Seal Stamp Applied
+              </span>
             </div>
           </div>
 

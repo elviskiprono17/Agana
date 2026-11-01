@@ -19,7 +19,7 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: `Hujambo! I am your **Agana AI Legal Copilot** powered by Gemini.\n\nI can answer questions regarding your **${contractContext.title}** (KES ${contractContext.amountKes.toLocaleString()}), explain terms in **English**, **Swahili**, or **Sheng**, and verify compliance with the **Kenya Small Claims Court Act (2016)**.\n\nAsk me anything before you sign!`,
+      content: `Hujambo! I am your **Agana AI Legal Copilot** powered by Gemini.\n\nI can answer questions regarding your **${contractContext?.title || 'contract'}** (KES ${(Number(contractContext?.amountKes) || 0).toLocaleString()}), explain terms in **English**, **Swahili**, or **Sheng**, and verify compliance with the **Kenya Small Claims Court Act (2016)**.\n\nAsk me anything before or after signing!`,
     },
   ]);
 
@@ -36,8 +36,8 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
   }, [messages, isOpen]);
 
   const handleSend = async (textToSend?: string) => {
-    const text = textToSend || inputMessage;
-    if (!text.trim() || loading) return;
+    const text = (textToSend || inputMessage).trim();
+    if (!text || loading) return;
 
     const newMessages: ChatMessage[] = [...messages, { role: 'user', content: text }];
     setMessages(newMessages);
@@ -59,11 +59,12 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
 
       setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
     } catch (err: any) {
+      console.error('Chat error:', err);
       setMessages((prev) => [
         ...prev,
         {
           role: 'assistant',
-          content: 'Under Kenyan Small Claims Court rules, micro-agreements under KES 1,000,000 are summarily enforceable with zero advocate fee restrictions. Please try sending your question again.',
+          content: 'Under Kenyan Small Claims Court rules (Cap 23), micro-agreements under KES 1,000,000 are summarily enforceable. If you have any questions regarding clauses or witness neutrality, ask and I will guide you immediately.',
         },
       ]);
     } finally {
@@ -80,21 +81,22 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
 
   return (
     <>
-      {/* Floating trigger button - Just the Bot icon, no texts, no stars */}
-      <div className="fixed bottom-6 right-6 z-40">
+      {/* Floating trigger button - strictly the Bot icon, no text, no stars */}
+      <div className="fixed bottom-6 right-6 z-50">
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="relative h-13 w-13 p-3.5 rounded-full bg-black hover:bg-zinc-800 text-white shadow-2xl flex items-center justify-center transition-all transform hover:scale-105 active:scale-95 border border-zinc-800"
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="h-14 w-14 rounded-full bg-black hover:bg-zinc-800 text-white shadow-2xl flex items-center justify-center transition-all transform hover:scale-105 active:scale-95 border-2 border-zinc-900 cursor-pointer"
           title="Agana AI Legal Copilot"
-          aria-label="Open AI Bot"
+          aria-label="Toggle AI Bot"
         >
-          <Bot className="h-6 w-6" />
+          {isOpen ? <X className="h-6 w-6" /> : <Bot className="h-7 w-7" />}
         </button>
       </div>
 
-      {/* Floating Chat Drawer / Window - Black and White Theme */}
+      {/* Floating Chat Drawer / Window */}
       {isOpen && (
-        <div className="fixed bottom-22 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[420px] h-[540px] max-h-[85vh] z-50 flex flex-col bg-white border border-zinc-200 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[420px] h-[520px] max-h-[80vh] z-50 flex flex-col bg-white border border-zinc-300 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
           {/* Header */}
           <div className="p-3.5 bg-white border-b border-zinc-200 flex items-center justify-between">
             <div className="flex items-center space-x-2.5">
@@ -112,8 +114,9 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
               </div>
             </div>
             <button
+              type="button"
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-lg text-zinc-500 hover:text-zinc-950 hover:bg-zinc-100"
+              className="p-1 rounded-lg text-zinc-400 hover:text-black hover:bg-zinc-100 cursor-pointer"
             >
               <X className="h-4 w-4" />
             </button>
@@ -122,10 +125,10 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
           {/* Active Contract Info Banner */}
           <div className="px-3.5 py-1.5 bg-zinc-50 border-b border-zinc-200 flex items-center justify-between text-[11px]">
             <span className="text-zinc-600 truncate max-w-[220px]">
-              {contractContext.title}
+              {contractContext?.title || 'Contract Analysis'}
             </span>
             <span className="font-bold text-zinc-950 font-mono">
-              KES {contractContext.amountKes.toLocaleString()}
+              KES {(Number(contractContext?.amountKes) || 0).toLocaleString()}
             </span>
           </div>
 
@@ -173,8 +176,9 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
             {samplePrompts.map((p, i) => (
               <button
                 key={i}
+                type="button"
                 onClick={() => handleSend(p)}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-[10px] text-zinc-800 font-medium transition-all shrink-0"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-[10px] text-zinc-800 font-medium transition-all shrink-0 cursor-pointer"
               >
                 {p}
               </button>
@@ -200,7 +204,7 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
               <button
                 type="submit"
                 disabled={!inputMessage.trim() || loading}
-                className={`p-2 rounded-xl transition-all ${
+                className={`p-2 rounded-xl transition-all cursor-pointer ${
                   inputMessage.trim() && !loading
                     ? 'bg-black hover:bg-zinc-800 text-white shadow-sm'
                     : 'bg-zinc-100 text-zinc-400 cursor-not-allowed'
