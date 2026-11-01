@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #080808;
-  --foreground: #ededed;
-  --surface: #121212;
-  --border: #222222;
-  --primary: #10b981;
+  --background: #fafafa;
+  --foreground: #09090b;
+  --surface: #ffffff;
+  --border: #e4e4e7;
+  --primary: #09090b;
 }
 
 body {
@@ -18,45 +18,36 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar for Light Theme */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0d0d0d;
+  background: #f4f4f5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  background: #d4d4d8;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b3b3b;
+  background: #a1a1aa;
 }
 
-/* Kenyan Flag Gradient Ribbon */
+/* Kenyan Flag Subtle Ribbon */
 .kenya-ribbon {
   background: linear-gradient(
     to right,
     #000000 0%, #000000 28%,
-    #ffffff 28%, #ffffff 32%,
+    #e4e4e7 28%, #e4e4e7 32%,
     #990000 32%, #990000 68%,
-    #ffffff 68%, #ffffff 72%,
+    #e4e4e7 68%, #e4e4e7 72%,
     #007A3D 72%, #007A3D 100%
   );
   height: 3px;
-}
-
-/* Glowing Border */
-.glow-border {
-  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
-}
-
-.gold-glow {
-  box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
 }
 
 /* Biometric Scan HUD */

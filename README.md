@@ -1,13 +1,13 @@
-# AGANA (YC W27 MVP) 🇰🇪
+# AGANA 🇰🇪
 ### Legally Binding Micro-Agreements with Instant Biometric KYC for Kenya & Global Scale
 
-> **Agana** solves informal transaction fraud in Kenya's \$20B+ informal economy by creating tamper-evident digital micro-agreements enforceable under the **Kenya Small Claims Court Act (2016)** (statutory jurisdiction up to **KES 1,000,000**) and the **Law of Contract Act (Cap 23)**.
+> **Agana** simplifies informal transactions in Kenya's economy by creating tamper-evident digital micro-agreements enforceable under the **Kenya Small Claims Court Act (2016)** (statutory jurisdiction up to **KES 1,000,000**) and the **Law of Contract Act (Cap 23)**.
 
 ---
 
 ## 🚀 Key Features
 
-1. **Target Presets for Kenya's Informal Economy**:
+1. **Target Presets for Kenya's Economy**:
    - 🐄 **Cow / Livestock Purchase**: Breed, coat color, ear tag / brand ID, dentition (age), lactation/pregnancy status, movement permits & 48hr health warranty.
    - 📱 **Phone & Electronics Sale**: Primary 15-digit IMEI (*#06#) validation, secondary serials, battery health %, cosmetic grade, iCloud / Google FRP account release warranty, 7-day hardware guarantee.
    - 💻 **Freelance & Skilled Gig Work**: Milestone deliverables, deposit split, turnaround time, IP assignment on final M-Pesa clearance, revision caps.
@@ -44,7 +44,7 @@
 ## 🛠️ Stack
 
 - **Framework**: Next.js 14 (App Router) + TypeScript
-- **Styling**: Tailwind CSS (Pure Black obsidian theme `#080808` with emerald and gold accents)
+- **Styling**: Tailwind CSS (Minimalist Black and White Light Theme)
 - **Database**: Supabase (Project: `Agana`)
 - **Identity & KYC**: Didit Protocol SDK
 - **AI Engine**: Google Gemini AI (`@google/generative-ai` & fallback legal copilot)

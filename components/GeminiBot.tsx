@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, Sparkles, X, Send, Bot, User, Scale, ShieldCheck, ChevronRight } from 'lucide-react';
+import { X, Send, Bot, User, Scale } from 'lucide-react';
 import { ContractContext, ChatMessage } from '@/lib/gemini';
 
 interface GeminiBotProps {
@@ -63,7 +63,7 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
         ...prev,
         {
           role: 'assistant',
-          content: 'Samahani! I had a connection hiccup. Under Kenyan Small Claims Court rules, micro-agreements under KES 1,000,000 are summarily enforceable with zero advocate fee restrictions. Please try sending your question again.',
+          content: 'Under Kenyan Small Claims Court rules, micro-agreements under KES 1,000,000 are summarily enforceable with zero advocate fee restrictions. Please try sending your question again.',
         },
       ]);
     } finally {
@@ -80,63 +80,57 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
 
   return (
     <>
-      {/* Floating trigger button */}
+      {/* Floating trigger button - Just the Bot icon, no texts, no stars */}
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative group flex items-center space-x-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white shadow-2xl shadow-emerald-500/30 transition-all transform hover:scale-105 active:scale-95"
+          className="relative h-13 w-13 p-3.5 rounded-full bg-black hover:bg-zinc-800 text-white shadow-2xl flex items-center justify-center transition-all transform hover:scale-105 active:scale-95 border border-zinc-800"
+          title="Agana AI Legal Copilot"
+          aria-label="Open AI Bot"
         >
-          <div className="relative">
-            <Bot className="h-5 w-5" />
-            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-300"></span>
-            </span>
-          </div>
-          <span className="text-xs font-bold tracking-wide">Ask Gemini AI</span>
-          <Sparkles className="h-4 w-4 text-amber-200" />
+          <Bot className="h-6 w-6" />
         </button>
       </div>
 
-      {/* Floating Chat Drawer / Window */}
+      {/* Floating Chat Drawer / Window - Black and White Theme */}
       {isOpen && (
-        <div className="fixed bottom-20 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[420px] h-[540px] max-h-[85vh] z-50 flex flex-col bg-[#0b0b0b] border border-[#262626] rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-22 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[420px] h-[540px] max-h-[85vh] z-50 flex flex-col bg-white border border-zinc-200 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
           {/* Header */}
-          <div className="p-3.5 bg-[#121212] border-b border-[#222222] flex items-center justify-between">
+          <div className="p-3.5 bg-white border-b border-zinc-200 flex items-center justify-between">
             <div className="flex items-center space-x-2.5">
-              <div className="h-8 w-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-                <Scale className="h-4 w-4 text-emerald-400" />
+              <div className="h-8 w-8 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center">
+                <Scale className="h-4 w-4 text-zinc-900" />
               </div>
               <div>
                 <div className="flex items-center space-x-1.5">
-                  <h4 className="text-xs font-bold text-white">Agana Legal Copilot</h4>
-                  <span className="text-[9px] font-bold px-1 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  <h4 className="text-xs font-bold text-zinc-950">Agana Legal Copilot</h4>
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-800 border border-zinc-200">
                     Gemini AI
                   </span>
                 </div>
-                <p className="text-[10px] text-zinc-400">Kenya Contract Act (Cap 23) Specialist</p>
+                <p className="text-[10px] text-zinc-500">Kenya Contract Act (Cap 23) Specialist</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-lg text-zinc-400 hover:text-white hover:bg-[#1f1f1f]"
+              className="p-1 rounded-lg text-zinc-500 hover:text-zinc-950 hover:bg-zinc-100"
             >
               <X className="h-4 w-4" />
             </button>
           </div>
 
           {/* Active Contract Info Banner */}
-          <div className="px-3.5 py-1.5 bg-[#161616] border-b border-[#222222] flex items-center justify-between text-[11px]">
-            <span className="text-zinc-400 truncate max-w-[220px]">
+          <div className="px-3.5 py-1.5 bg-zinc-50 border-b border-zinc-200 flex items-center justify-between text-[11px]">
+            <span className="text-zinc-600 truncate max-w-[220px]">
               {contractContext.title}
             </span>
-            <span className="font-semibold text-emerald-400">
+            <span className="font-bold text-zinc-950 font-mono">
               KES {contractContext.amountKes.toLocaleString()}
             </span>
           </div>
 
           {/* Messages list */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#fafafa]">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -145,29 +139,29 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
                 }`}
               >
                 {msg.role !== 'user' && (
-                  <div className="h-6 w-6 rounded-md bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Bot className="h-3.5 w-3.5 text-emerald-400" />
+                  <div className="h-6 w-6 rounded-md bg-zinc-200 border border-zinc-300 flex items-center justify-center shrink-0 mt-0.5">
+                    <Bot className="h-3.5 w-3.5 text-zinc-900" />
                   </div>
                 )}
                 <div
                   className={`max-w-[85%] rounded-xl p-3 text-xs leading-relaxed whitespace-pre-wrap ${
                     msg.role === 'user'
-                      ? 'bg-emerald-600 text-white rounded-br-none shadow-md shadow-emerald-600/10'
-                      : 'bg-[#151515] border border-[#242424] text-zinc-200 rounded-bl-none'
+                      ? 'bg-black text-white rounded-br-none shadow-sm'
+                      : 'bg-white border border-zinc-200 text-zinc-900 rounded-bl-none shadow-sm'
                   }`}
                 >
                   {msg.content}
                 </div>
                 {msg.role === 'user' && (
-                  <div className="h-6 w-6 rounded-md bg-[#252525] flex items-center justify-center shrink-0 mt-0.5">
-                    <User className="h-3.5 w-3.5 text-zinc-300" />
+                  <div className="h-6 w-6 rounded-md bg-zinc-800 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <User className="h-3.5 w-3.5 text-zinc-200" />
                   </div>
                 )}
               </div>
             ))}
             {loading && (
-              <div className="flex space-x-2 items-center text-zinc-400 text-xs italic">
-                <Bot className="h-4 w-4 text-emerald-400 animate-spin" />
+              <div className="flex space-x-2 items-center text-zinc-500 text-xs italic">
+                <Bot className="h-4 w-4 text-zinc-900 animate-spin" />
                 <span>Gemini is analyzing contract clauses...</span>
               </div>
             )}
@@ -175,12 +169,12 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
           </div>
 
           {/* Quick Prompts */}
-          <div className="px-3 py-2 bg-[#0e0e0e] border-t border-[#1c1c1c] overflow-x-auto flex space-x-1.5 scrollbar-none">
+          <div className="px-3 py-2 bg-white border-t border-zinc-200 overflow-x-auto flex space-x-1.5 scrollbar-none">
             {samplePrompts.map((p, i) => (
               <button
                 key={i}
                 onClick={() => handleSend(p)}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#181818] hover:bg-[#222222] border border-[#2b2b2b] text-[10px] text-zinc-300 hover:text-white transition-all shrink-0"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-[10px] text-zinc-800 font-medium transition-all shrink-0"
               >
                 {p}
               </button>
@@ -188,7 +182,7 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
           </div>
 
           {/* Input Box */}
-          <div className="p-3 bg-[#121212] border-t border-[#222222]">
+          <div className="p-3 bg-white border-t border-zinc-200">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -201,15 +195,15 @@ export const GeminiBot: React.FC<GeminiBotProps> = ({
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 placeholder="Ask about clauses, warranties, or Kenyan law..."
-                className="flex-1 bg-[#0a0a0a] border border-[#262626] rounded-xl px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500"
+                className="flex-1 bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2 text-xs text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-black focus:bg-white"
               />
               <button
                 type="submit"
                 disabled={!inputMessage.trim() || loading}
                 className={`p-2 rounded-xl transition-all ${
                   inputMessage.trim() && !loading
-                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/20'
-                    : 'bg-[#1a1a1a] text-zinc-600 cursor-not-allowed'
+                    ? 'bg-black hover:bg-zinc-800 text-white shadow-sm'
+                    : 'bg-zinc-100 text-zinc-400 cursor-not-allowed'
                 }`}
               >
                 <Send className="h-4 w-4" />
